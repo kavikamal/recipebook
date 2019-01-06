@@ -5,6 +5,9 @@ class Author(models.Model):
     name = models.CharField(max_length=50)
     bio = models.TextField(max_length=500)
 
+    def __str__(self):
+        return self.name
+
 
 class Recipe(models.Model):
     title = models.CharField(max_length=100)
@@ -12,3 +15,6 @@ class Recipe(models.Model):
     description = models.CharField(max_length=300)
     time = models.IntegerField(default=0)
     instructions = models.TextField(max_length=5000)
+
+    def __str__(self):
+        return self.title

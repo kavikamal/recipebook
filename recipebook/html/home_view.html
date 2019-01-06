@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>
+        Recipe List
+    </h1>
+    <div>
+        {% for recipe in data %}
+        <div>
+            <div>
+                <a href="/recipe/{{recipe.id}}">{{ recipe.title }}</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
