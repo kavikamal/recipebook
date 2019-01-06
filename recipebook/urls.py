@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from recipebook.views import home_view, author_view, recipe_view
+from recipebook.views import home_view, author_view, recipe_view, new_recipe_add
 from recipebook.models import Author, Recipe
 
 admin.site.register(Author)
@@ -26,4 +26,5 @@ urlpatterns = [
     path('', home_view),
     path('recipe/<int:recipe_id>', recipe_view),
     path('author/<int:author_id>', author_view),
+    path('newrecipeadd/', new_recipe_add),
 ]

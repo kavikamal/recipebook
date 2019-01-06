@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from recipebook.models import Recipe, Author
+from recipebook.forms import NewRecipeAdd
 
 
 def home_view(request):
@@ -21,3 +22,14 @@ def author_view(request, author_id):
         )
     }
     return render(request, 'author_view.html', {'data': data})
+
+
+def new_recipe_add(request):
+    html = 'new_recipe_add.html'
+    form = None
+    if request.method == 'POST':
+        pass
+    else:
+        form = NewRecipeAdd()
+
+    return render(request, html, {'form': form})
