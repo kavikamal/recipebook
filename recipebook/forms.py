@@ -7,5 +7,10 @@ class NewRecipeAdd(forms.Form):
     authors = [(a.id, a.name) for a in Author.objects.all()]
     author = forms.ChoiceField(choices=authors)
     description = forms.CharField(max_length=300)
-    time = forms.IntegerField(default=0)
+    time = forms.CharField(max_length=50)
     instructions = forms.CharField(widget=forms.Textarea)
+
+
+class NewAuthorAdd(forms.Form):
+    name = forms.CharField(max_length=50)
+    bio = forms.CharField(widget=forms.Textarea)

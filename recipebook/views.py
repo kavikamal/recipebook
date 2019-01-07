@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from recipebook.models import Recipe, Author
-from recipebook.forms import NewRecipeAdd
+from recipebook.forms import NewRecipeAdd, NewAuthorAdd
 
 
 def home_view(request):
@@ -25,11 +25,35 @@ def author_view(request, author_id):
 
 
 def new_recipe_add(request):
-    html = 'new_recipe_add.html'
     form = None
     if request.method == 'POST':
-        pass
+        form = NewRecipeAdd(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            Recipe.objects.create(
+                title=data['title'],
+                author=Author.objects.filter(id=data['author']).first(),
+                description=data['description'],
+                time=data['time'],
+                instructions=data['instructions'],
+            )
+            return render(request, 'success_view.html', {'data': 'Recipe'})
     else:
         form = NewRecipeAdd()
+        return render(request, 'new_recipe_add.html', {'form': form})
 
-    return render(request, html, {'form': form})
+
+def new_author_add(request):
+    form = None
+    if request.method == 'POST':
+        form = NewAuthorAdd(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            Author.objects.create(
+                name=data['name'],
+                bio=data['bio']
+            )
+            return render(request, 'success_view.html', {'data': 'Author'})
+    else:
+        form = NewAuthorAdd()
+        return render(request, 'new_author_add.html', {'form': form})
