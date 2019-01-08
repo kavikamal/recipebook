@@ -1,7 +1,8 @@
 from django.shortcuts import render, HttpResponseRedirect
 from django.contrib.auth.models import User
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
 from django.http import HttpResponse
 from django.shortcuts import reverse
 from recipebook.models import Recipe, Author
@@ -48,7 +49,7 @@ def new_recipe_add(request):
         return render(request, 'new_recipe_add.html', {'form': form})
 
 
-@login_required
+@staff_member_required()
 def new_author_add(request):
     form = None
     if request.method == 'POST':
